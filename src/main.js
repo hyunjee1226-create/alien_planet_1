@@ -1,5 +1,10 @@
 import './style.css'
 
+const GOOGLE_FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSeoI5MkcKty2pfQlVTvtvI7eDXujNJhrKksg4DZbQbEEqjN-g/formResponse'
+const ENTRY_NAME = 'entry.1257199285'
+const ENTRY_STUDENT_ID = 'entry.368492961'
+
 const app = document.querySelector('#app')
 
 app.innerHTML = `
@@ -73,5 +78,68 @@ app.innerHTML = `
         </article>
       </div>
     </section>
+
+    <section class="creature-section">
+      <div class="creature-section__inner">
+        <h2 class="creature-section__title">지금부터 생명체를 구상해보자</h2>
+        <!-- 여기 텍스트는 나중에 수정 예정 -->
+        <p class="creature-section__subtitle">
+          탐사할 행성을 골랐다면, 이제 여러분만의 생명체와 탐사 정보를 입력해 보세요.
+        </p>
+
+        <form id="studentForm" class="student-form">
+          <div class="form-field">
+            <label for="studentName">이름</label>
+            <input type="text" id="studentName" name="studentName" required />
+          </div>
+          <div class="form-field">
+            <label for="studentId">학번</label>
+            <input type="text" id="studentId" name="studentId" required />
+          </div>
+          <button type="submit" class="student-submit-btn">정보 전송하기</button>
+          <p class="submit-status" id="submitStatus"></p>
+        </form>
+      </div>
+    </section>
   </main>
 `
+
+const form = document.querySelector('#studentForm')
+const statusEl = document.querySelector('#submitStatus')
+
+if (form) {
+  form.addEventListener('submit', (event) => {
+    event.preventDefault()
+
+    const nameValue = form.studentName.value.trim()
+    const studentIdValue = form.studentId.value.trim()
+
+    if (!nameValue || !studentIdValue) {
+      statusEl.textContent = '이름과 학번을 모두 입력해주세요.'
+      statusEl.classList.add('is-error')
+      return
+    }
+
+    const formData = new FormData()
+    formData.append(ENTRY_NAME, nameValue)
+    formData.append(ENTRY_STUDENT_ID, studentIdValue)
+
+    fetch(GOOGLE_FORM_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: formData,
+    })
+      .then(() => {
+        statusEl.textContent =
+          '전송이 완료되었습니다. (네트워크 상태에 따라 실제 저장 여부는 달라질 수 있습니다.)'
+        statusEl.classList.remove('is-error')
+        statusEl.classList.add('is-success')
+        form.reset()
+      })
+      .catch((error) => {
+        console.error('Google Form 전송 중 오류:', error)
+        statusEl.textContent = '전송이 시도되었습니다. 네트워크 상태를 확인하세요.'
+        statusEl.classList.add('is-error')
+      })
+  })
+}

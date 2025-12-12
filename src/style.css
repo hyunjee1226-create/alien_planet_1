@@ -18,18 +18,91 @@
   box-sizing: border-box;
 }
 
+
 body {
   margin: 0;
   min-height: 100vh;
-  background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.06), transparent 25%),
-    radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.05), transparent 22%),
-    radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.04), transparent 22%),
-    linear-gradient(135deg, #0b1026 0%, #1b1f3f 45%, #2d1c48 100%);
-  color: #e6e7ff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #f5f5ff;
+
+  /* 네뷸라 느낌 우주 배경 */
+  background:
+    /* 분홍 구름 */
+    radial-gradient(circle at 18% 20%, rgba(255, 120, 200, 0.65) 0, rgba(0, 0, 0, 0) 42%),
+    /* 파란 안개 */
+    radial-gradient(circle at 70% 30%, rgba(80, 170, 255, 0.7) 0, rgba(0, 0, 0, 0) 40%),
+    /* 보라 구름 */
+    radial-gradient(circle at 60% 80%, rgba(140, 90, 255, 0.6) 0, rgba(0, 0, 0, 0) 48%),
+    /* 아래쪽 노란빛 */
+    radial-gradient(circle at 0% 100%, rgba(255, 210, 120, 0.55) 0, rgba(0, 0, 0, 0) 40%),
+    /* 전체 어두운 우주 바탕 */
+    radial-gradient(circle at 50% 40%, #050421 0, #020015 55%, #000000 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
 }
+
+/* 화면 전체를 덮는 별 레이어 */
+.star-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;   /* 클릭 막지 않게 */
+  z-index: 9999;          /* 모든 것 위에 올라오게 */
+
+  background-image:
+    /* 큰 별 (15~18px 정도) */
+    radial-gradient(18px 18px at 12% 18%, rgba(255, 255, 255, 0.95), transparent),
+    radial-gradient(18px 18px at 35% 40%, rgba(255, 255, 255, 0.95), transparent),
+    radial-gradient(18px 18px at 75% 32%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(18px 18px at 90% 70%, rgba(255, 255, 255, 0.95), transparent),
+    radial-gradient(18px 18px at 55% 85%, rgba(255, 255, 255, 0.95), transparent),
+
+    /* 중간 별 (12px) */
+    radial-gradient(12px 12px at 20% 10%, rgba(255, 255, 255, 0.85), transparent),
+    radial-gradient(12px 12px at 50% 20%, rgba(255, 255, 255, 0.85), transparent),
+    radial-gradient(12px 12px at 80% 15%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(12px 12px at 25% 60%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(12px 12px at 70% 55%, rgba(255, 255, 255, 0.85), transparent),
+    radial-gradient(12px 12px at 92% 40%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(12px 12px at 10% 75%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(12px 12px at 45% 90%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(12px 12px at 65% 80%, rgba(255, 255, 255, 0.85), transparent),
+    radial-gradient(12px 12px at 82% 92%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(12px 12px at 32% 30%, rgba(255, 255, 255, 0.85), transparent),
+    radial-gradient(12px 12px at 58% 10%, rgba(255, 255, 255, 0.85), transparent);
+
+  opacity: 0.9;
+}
+
+
+
 
 #app {
   min-height: 100vh;
+  position: relative;
+  isolation: isolate;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(2px 2px at 10% 20%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(2px 2px at 25% 35%, rgba(255, 255, 255, 0.35), transparent),
+    radial-gradient(2px 2px at 40% 15%, rgba(255, 255, 255, 0.45), transparent),
+    radial-gradient(2px 2px at 60% 30%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(2px 2px at 80% 12%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(2px 2px at 70% 60%, rgba(255, 255, 255, 0.35), transparent),
+    radial-gradient(2px 2px at 30% 70%, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(2px 2px at 50% 50%, rgba(255, 255, 255, 0.55), transparent);
+  opacity: 0.6;
+  z-index: 0;
+}
+
+#app {
+  position: relative;
 }
 
 .container {
@@ -151,4 +224,97 @@ body {
   color: #d1d6ff;
   font-size: 0.96rem;
   line-height: 1.55;
+}
+
+.creature-section {
+  margin-top: 32px;
+  padding: 2px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #c9e7ff 0%, #e0ffe7 45%, #ffe7f7 100%);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.35);
+}
+
+.creature-section__inner {
+  background: rgba(255, 255, 255, 0.86);
+  color: #233048;
+  border-radius: 20px;
+  padding: 26px 24px;
+}
+
+.creature-section__title {
+  margin: 0 0 10px;
+  font-family: 'Orbitron', 'Inter', sans-serif;
+  letter-spacing: 0.02em;
+  color: #1d2a4b;
+}
+
+.creature-section__subtitle {
+  margin: 0 0 18px;
+  color: #3c4861;
+}
+
+.student-form {
+  display: grid;
+  gap: 14px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-weight: 600;
+  color: #1e2740;
+}
+
+.form-field input {
+  padding: 10px 12px;
+  border: 1px solid #c5d3f3;
+  border-radius: 10px;
+  background: #f7faff;
+  font-size: 1rem;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.form-field input:focus {
+  outline: none;
+  border-color: #7ba7ff;
+  box-shadow: 0 0 0 3px rgba(123, 167, 255, 0.25);
+}
+
+.student-submit-btn {
+  margin-top: 6px;
+  padding: 12px 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #5478ff, #7ae7ff);
+  color: #0b122a;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+.student-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(84, 120, 255, 0.35);
+}
+
+.student-submit-btn:active {
+  transform: translateY(0);
+}
+
+.submit-status {
+  margin: 8px 0 0;
+  font-size: 0.92rem;
+  color: #1e2740;
+}
+
+.submit-status.is-success {
+  color: #1f8a36;
+}
+
+.submit-status.is-error {
+  color: #c0392b;
 }
