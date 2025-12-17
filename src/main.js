@@ -59,7 +59,7 @@ app.innerHTML = `
         <article class="planet-card">
           <div class="planet-card__image">
             <!-- 나중에 /public/planet1.gif 파일을 추가하고, src="/planet1.gif"로 바꾸면 됩니다. -->
-            <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=600&q=80" alt="행성 A" />
+            <img src="/PlanetA.jpg" alt="행성 A" />
           </div>
           <div class="planet-card__body">
             <h3 class="planet-card__title">행성 A</h3>
@@ -70,7 +70,7 @@ app.innerHTML = `
         <article class="planet-card">
           <div class="planet-card__image">
             <!-- 나중에 /public/planet2.gif 파일을 추가하고, src="/planet2.gif"로 바꾸면 됩니다. -->
-            <img src="https://images.unsplash.com/photo-1451186859696-371d9477be93?auto=format&fit=crop&w=600&q=80" alt="행성 B" />
+            <img src="/PlanetB.jpg" alt="행성 B" />
           </div>
           <div class="planet-card__body">
             <h3 class="planet-card__title">행성 B</h3>
@@ -81,7 +81,7 @@ app.innerHTML = `
         <article class="planet-card">
           <div class="planet-card__image">
             <!-- 나중에 /public/planet3.gif 파일을 추가하고, src="/planet3.gif"로 바꾸면 됩니다. -->
-            <img src="https://images.unsplash.com/photo-1470229538611-16ba8c7ffbd7?auto=format&fit=crop&w=600&q=80" alt="행성 C" />
+            <img src="/PlanetC.png" alt="행성 C" />
           </div>
           <div class="planet-card__body">
             <h3 class="planet-card__title">행성 C</h3>
