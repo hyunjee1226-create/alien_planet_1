@@ -2,17 +2,21 @@ import './style.css'
 
 const GOOGLE_FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSeoI5MkcKty2pfQlVTvtvI7eDXujNJhrKksg4DZbQbEEqjN-g/formResponse'
-const ENTRY_NAME = 'entry.368492961'      // 이름
-const ENTRY_STUDENT_ID = 'entry.1257199285' // 학번
-const ENTRY_PLANET = 'entry.1590051952'    // 새로 추가: 선택한 행성
-const ENTRY_CHATLOG = 'entry.992473654'    // 새로 추가: 챗봇 대화
-  // ✅ 브레인스토밍용 Google Form (새 폼)
-const BRAIN_FORM_URL =
-'https://docs.google.com/forms/d/e/1FAIpQLSehCajc39WlTGOQTGB2hGg1WY44OpaF4fzMTZMLcDD6nsN02Q/formResponse'
 
-const ENTRY_BRAIN_A = 'entry.366340186'
-const ENTRY_BRAIN_B = 'entry.1842714782'
-const ENTRY_BRAIN_C = 'entry.147773659'
+// ✅ 통합 폼 엔트리(네가 준 값으로 통일)
+const ENTRY_STUDENT_ID = 'entry.1257199285'     // 학번
+const ENTRY_NAME = 'entry.368492961'            // 이름
+
+const ENTRY_BRAIN_A = 'entry.54690478'          // 브레인: 행성A
+const ENTRY_BRAIN_B = 'entry.1428284428'        // 브레인: 행성B
+const ENTRY_BRAIN_C = 'entry.954814840'         // 브레인: 행성C
+
+const ENTRY_PLANET = 'entry.1590051952'         // 선택한 행성
+const ENTRY_CHATLOG = 'entry.992473654'         // 챗봇 대화
+
+const ENTRY_ENV = 'entry.1134168436'            // 선택한 행성의 환경
+const ENTRY_PREY = 'entry.1306788275'           // 피식자
+const ENTRY_PRED = 'entry.68054127'             // 포식자
 
 
 const app = document.querySelector('#app')
@@ -166,6 +170,25 @@ app.innerHTML = `
   <div class="submit-warning">
     ⚠️ 대화 내용을 제출하기 전, <strong>‘대화 요약’</strong>이라는 명령어를 입력한 후, 응답을 받아주세요.
   </div>
+  
+  <div class="final-answer-section">
+    <h3 class="final-answer-title">최종 정리</h3>
+
+    <div class="final-answer-card">
+      <p class="final-answer-q">1) 선택한 행성의 환경은 어떤 특징을 가질까요? (최소 3가지)</p>
+      <textarea id="envAnswer" class="final-answer-textarea" placeholder="예: 온도, 대기 성분, 중력, 지표 환경 등 최소 3가지"></textarea>
+    </div>
+
+    <div class="final-answer-card">
+      <p class="final-answer-q">2) 선택한 행성의 피식자는 어떤 특징을 가질까요? (최소 3가지)</p>
+      <textarea id="preyAnswer" class="final-answer-textarea" placeholder="예: 크기, 이동 방식, 방어 전략 등 최소 3가지"></textarea>
+    </div>
+
+    <div class="final-answer-card">
+      <p class="final-answer-q">3) 선택한 행성의 포식자는 어떤 모습을 가질까요? (최소 3가지)</p>
+      <textarea id="predAnswer" class="final-answer-textarea" placeholder="예: 사냥 방식, 감각 기관, 몸 구조 등 최소 3가지"></textarea>
+    </div>
+  </div>
 
         <button type="submit" id="finalSubmitBtn" class="final-submit-btn" style="display:none;">
           제출하기
@@ -194,6 +217,13 @@ fullForm.addEventListener('submit', (e) => {
     submitStatus.classList.add("is-error")
     return
   }
+  if (!canSubmitNow()) {
+    submitStatus.textContent = "브레인스토밍 3칸과 최종 정리 3칸을 모두 작성해야 제출할 수 있어요."
+    submitStatus.classList.remove("is-success")
+    submitStatus.classList.add("is-error")
+    return
+  }
+
   const nameValue = document.querySelector('#studentName').value.trim()
   const idValue = document.querySelector('#studentId').value.trim()
   const planetValue = document.querySelector('#selectedPlanet').value.trim()
@@ -210,45 +240,49 @@ fullForm.addEventListener('submit', (e) => {
 
 formData.append(ENTRY_CHATLOG, chatText)
 
-  // ✅ 브레인스토밍 입력값(3칸)
-  const brainAValue = document.querySelector('#brainA')?.value.trim() || ""
-  const brainBValue = document.querySelector('#brainB')?.value.trim() || ""
-  const brainCValue = document.querySelector('#brainC')?.value.trim() || ""
+  // ✅ 브레인스토밍 3칸
+  const brainAValue = brainAEl?.value.trim() || ""
+  const brainBValue = brainBEl?.value.trim() || ""
+  const brainCValue = brainCEl?.value.trim() || ""
 
-  // ✅ 브레인스토밍용 FormData (새 폼에 따로 제출)
-  const brainData = new FormData()
-  brainData.append(ENTRY_BRAIN_A, brainAValue)
-  brainData.append(ENTRY_BRAIN_B, brainBValue)
-  brainData.append(ENTRY_BRAIN_C, brainCValue)
+  // ✅ 최종답안 3칸
+  const envValue = envEl?.value.trim() || ""
+  const preyValue = preyEl?.value.trim() || ""
+  const predValue = predEl?.value.trim() || ""
 
+  formData.append(ENTRY_BRAIN_A, brainAValue)
+  formData.append(ENTRY_BRAIN_B, brainBValue)
+  formData.append(ENTRY_BRAIN_C, brainCValue)
 
+  formData.append(ENTRY_ENV, envValue)
+  formData.append(ENTRY_PREY, preyValue)
+  formData.append(ENTRY_PRED, predValue)
+
+  
   fetch(GOOGLE_FORM_URL, {
     method: 'POST',
     mode: 'no-cors',
     body: formData
   })
     .then(() => {
-      // ✅ 브레인스토밍 폼도 같이 제출 (별도 폼)
-      return fetch(BRAIN_FORM_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: brainData
-      })
-    })
-    .then(() => {
       finalSubmitBtn.textContent = "제출 완료"
       finalSubmitBtn.classList.add("is-complete")
       finalSubmitBtn.disabled = true
 
       submitStatus.textContent = ""
-      fullForm.reset()
-    })
-    .catch(() => {
-      submitStatus.textContent = "전송 오류. 네트워크를 확인해주세요."
-      submitStatus.classList.add("is-error")
-    })
+      submitStatus.classList.remove("is-error")
 
-  
+      // ✅ 폼 reset은 form 안의 input만 초기화되므로 textarea도 수동 초기화
+      fullForm.reset()
+      if (brainAEl) brainAEl.value = ""
+      if (brainBEl) brainBEl.value = ""
+      if (brainCEl) brainCEl.value = ""
+      if (envEl) envEl.value = ""
+      if (preyEl) preyEl.value = ""
+      if (predEl) predEl.value = ""
+
+      updateSubmitUI()
+    })
     .catch(() => {
       submitStatus.textContent = "전송 오류. 네트워크를 확인해주세요."
       submitStatus.classList.add("is-error")
@@ -293,6 +327,66 @@ const apiStatusEl = document.querySelector('#apiStatus')
 const chatbotMessagesEl = document.querySelector('#chatbotMessages')
 const chatbotInput = document.querySelector('#chatbotInput')
 const finalSubmitBtn = document.querySelector('#finalSubmitBtn')
+
+const brainAEl = document.querySelector('#brainA')
+const brainBEl = document.querySelector('#brainB')
+const brainCEl = document.querySelector('#brainC')
+
+const envEl = document.querySelector('#envAnswer')
+const preyEl = document.querySelector('#preyAnswer')
+const predEl = document.querySelector('#predAnswer')
+
+let summaryUnlocked = false  // ✅ '대화 요약' 응답까지 받은 뒤 true
+
+function countIdeas(text) {
+  // 줄바꿈/쉼표/중점/세미콜론 기준으로 항목 수 세기
+  return text
+    .split(/[\n,·;]+/g)
+    .map(s => s.trim())
+    .filter(Boolean).length
+}
+
+function canSubmitNow() {
+  const brainA = brainAEl?.value.trim() || ""
+  const brainB = brainBEl?.value.trim() || ""
+  const brainC = brainCEl?.value.trim() || ""
+
+  const env = envEl?.value.trim() || ""
+  const prey = preyEl?.value.trim() || ""
+  const pred = predEl?.value.trim() || ""
+
+  // 6칸 모두 작성
+  const allFilled = brainA && brainB && brainC && env && prey && pred
+
+  // 최종 3칸은 '최소 3가지'
+  const min3 = countIdeas(env) >= 3 && countIdeas(prey) >= 3 && countIdeas(pred) >= 3
+
+  return summaryUnlocked && allFilled && min3
+}
+
+function updateSubmitUI() {
+  // 버튼은 '요약 완료' 때만 보이게(기존 조건 유지)
+  if (!summaryUnlocked) {
+    finalSubmitBtn.style.display = "none"
+    return
+  }
+
+  finalSubmitBtn.style.display = "block"
+  finalSubmitBtn.disabled = !canSubmitNow()
+  finalSubmitBtn.style.opacity = finalSubmitBtn.disabled ? "0.6" : "1"
+  finalSubmitBtn.style.cursor = finalSubmitBtn.disabled ? "not-allowed" : "pointer"
+}
+
+document.addEventListener('input', (e) => {
+  const id = e.target?.id
+  if (
+    id === "brainA" || id === "brainB" || id === "brainC" ||
+    id === "envAnswer" || id === "preyAnswer" || id === "predAnswer"
+  ) {
+    updateSubmitUI()
+  }
+})
+
 
 // API 상태 표시
 if (apiKey) {
@@ -396,7 +490,8 @@ chatbotSendBtn.addEventListener('click', async (e) => {
     
       // ✅ 요약 명령일 때만 제출 버튼 활성화
       if (isSummaryCommand) {
-        finalSubmitBtn.style.display = "block"
+        summaryUnlocked = true
+        updateSubmitUI()
       }
     }
     
