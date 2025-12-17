@@ -59,7 +59,7 @@ app.innerHTML = `
         <article class="planet-card">
           <div class="planet-card__image">
             <!-- 나중에 /public/planet1.gif 파일을 추가하고, src="/planet1.gif"로 바꾸면 됩니다. -->
-            <img src="/PlanetA.jpg" alt="행성 A" />
+            <img src="/PlanetA.png" alt="행성 A" />
           </div>
           <div class="planet-card__body">
             <h3 class="planet-card__title">행성 A</h3>
@@ -70,7 +70,7 @@ app.innerHTML = `
         <article class="planet-card">
           <div class="planet-card__image">
             <!-- 나중에 /public/planet2.gif 파일을 추가하고, src="/planet2.gif"로 바꾸면 됩니다. -->
-            <img src="/PlanetB.jpg" alt="행성 B" />
+            <img src="/PlanetB.png" alt="행성 B" />
           </div>
           <div class="planet-card__body">
             <h3 class="planet-card__title">행성 B</h3>
