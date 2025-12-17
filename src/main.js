@@ -101,7 +101,7 @@ app.innerHTML = `
       <h2 class="section__title">브레인스토밍 영역</h2>
 
       <p class="brain-desc">
-        <span class="brain-strong">이 영역은 절대 채점에 들어가지 않습니다.</span><br>
+        <span class="brain-strong">이 영역은 채점에 들어가지 않습니다.</span><br>
         과학적 사실이든, 틀린 정보든, 단순한 상상이든, 해결하고 싶은 궁금증이든 상관없어요.
         떠오르는 생각들을 정리하지 말고, 마구 써보세요!
       </p>
@@ -128,8 +128,8 @@ app.innerHTML = `
 
       <form id="fullForm" class="full-form">
 
-        <br><h2 class="form-title">자, 어떤 행성을 연구하기로 결정했나요?</h2>
-        <p>AI 챗봇 🤖아스트라가 여러분의 연구를 도와줄 거예요!</p><br>
+        <br><h2 class="form-title">자, 어떤 행성을 탐사하기로 결정했나요?</h2>
+        <p>AI 챗봇 🤖아스트라가 여러분의 탐사를 도와줄 거예요!</p><br>
         <div class="form-field">
           <label for="studentId">학번</label>
           <input type="text" id="studentId" placeholder="예: 2103" required />
@@ -180,7 +180,7 @@ app.innerHTML = `
     <!-- ✅ 최종 정리 섹션(새 섹션으로 분리) -->
     <section class="final-answer-wrapper">
       <div class="final-answer-section">
-        <h3 class="final-answer-title">📜 최종 탐구 일지 📜</h3>
+        <br><h3 class="final-answer-title">🛸 최종 탐구 일지 🛸</h3>
 
         <div class="final-answer-card">
           <p class="final-answer-q">1) 당신이 탐사하기로 한 행성은 어떤 모습인가요? (최소 3가지)</p>
