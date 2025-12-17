@@ -83,6 +83,7 @@ body {
 .section {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 28px 26px;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
@@ -439,12 +440,12 @@ body {
 }
 
 .api-status.is-connected {
-  background: rgba(76, 175, 80, 0.2);
+  background: rgba(106, 231, 110, 0.2);
   color: #2e7d32;
 }
 
 .api-status.is-error {
-  background: rgba(244, 67, 54, 0.2);
+  background: rgba(218, 107, 99, 0.2);
   color: #c62828;
 }
 
@@ -671,6 +672,24 @@ body {
   padding: 24px 24px 32px;
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.06);  /* 반투명 */
+  backdrop-filter: blur(10px);
   color: #000;
   box-shadow: 0 22px 60px rgba(0, 0, 0, 0.227);
+}
+
+/* ✅ 입력창(input) + 텍스트영역(textarea) placeholder까지 통일 */
+.form-field input,
+.brain-textarea,
+.final-answer-textarea {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", 'Noto Sans KR', sans-serif;
+  font-size: 1rem;
+  color: #000;
+}
+
+.form-field input::placeholder,
+.brain-textarea::placeholder,
+.final-answer-textarea::placeholder {
+  font-family: inherit;
+  font-size: inherit;
+  color: rgba(0, 0, 0, 0.45);
 }
