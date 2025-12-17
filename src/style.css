@@ -25,56 +25,15 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: #f5f5ff;
 
-  /* 네뷸라 느낌 우주 배경 */
-  background:
-    /* 분홍 구름 */
-    radial-gradient(circle at 18% 20%, rgba(255, 120, 200, 0.65) 0, rgba(0, 0, 0, 0) 42%),
-    /* 파란 안개 */
-    radial-gradient(circle at 70% 30%, rgba(80, 170, 255, 0.7) 0, rgba(0, 0, 0, 0) 40%),
-    /* 보라 구름 */
-    radial-gradient(circle at 60% 80%, rgba(140, 90, 255, 0.6) 0, rgba(0, 0, 0, 0) 48%),
-    /* 아래쪽 노란빛 */
-    radial-gradient(circle at 0% 100%, rgba(255, 210, 120, 0.55) 0, rgba(0, 0, 0, 0) 40%),
-    /* 전체 어두운 우주 바탕 */
-    radial-gradient(circle at 50% 40%, #050421 0, #020015 55%, #000000 100%);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+  /* ✅ 업로드한 배경 이미지로 교체 */
+  background-image: url("/bg1.png");
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
   position: relative;
 }
-
-/* 화면 전체를 덮는 별 레이어 */
-.star-layer {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;   /* 클릭 막지 않게 */
-  z-index: 9999;          /* 모든 것 위에 올라오게 */
-
-  background-image:
-    /* 큰 별 (15~18px 정도) */
-    radial-gradient(18px 18px at 12% 18%, rgba(255, 255, 255, 0.95), transparent),
-    radial-gradient(18px 18px at 35% 40%, rgba(255, 255, 255, 0.95), transparent),
-    radial-gradient(18px 18px at 75% 32%, rgba(255, 255, 255, 0.9), transparent),
-    radial-gradient(18px 18px at 90% 70%, rgba(255, 255, 255, 0.95), transparent),
-    radial-gradient(18px 18px at 55% 85%, rgba(255, 255, 255, 0.95), transparent),
-
-    /* 중간 별 (12px) */
-    radial-gradient(12px 12px at 20% 10%, rgba(255, 255, 255, 0.85), transparent),
-    radial-gradient(12px 12px at 50% 20%, rgba(255, 255, 255, 0.85), transparent),
-    radial-gradient(12px 12px at 80% 15%, rgba(255, 255, 255, 0.8), transparent),
-    radial-gradient(12px 12px at 25% 60%, rgba(255, 255, 255, 0.8), transparent),
-    radial-gradient(12px 12px at 70% 55%, rgba(255, 255, 255, 0.85), transparent),
-    radial-gradient(12px 12px at 92% 40%, rgba(255, 255, 255, 0.8), transparent),
-    radial-gradient(12px 12px at 10% 75%, rgba(255, 255, 255, 0.8), transparent),
-    radial-gradient(12px 12px at 45% 90%, rgba(255, 255, 255, 0.8), transparent),
-    radial-gradient(12px 12px at 65% 80%, rgba(255, 255, 255, 0.85), transparent),
-    radial-gradient(12px 12px at 82% 92%, rgba(255, 255, 255, 0.8), transparent),
-    radial-gradient(12px 12px at 32% 30%, rgba(255, 255, 255, 0.85), transparent),
-    radial-gradient(12px 12px at 58% 10%, rgba(255, 255, 255, 0.85), transparent);
-
-  opacity: 0.9;
-}
-
 
 
 
