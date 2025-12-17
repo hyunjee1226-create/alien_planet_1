@@ -6,7 +6,14 @@ const ENTRY_NAME = 'entry.368492961'      // 이름
 const ENTRY_STUDENT_ID = 'entry.1257199285' // 학번
 const ENTRY_PLANET = 'entry.1590051952'    // 새로 추가: 선택한 행성
 const ENTRY_CHATLOG = 'entry.992473654'    // 새로 추가: 챗봇 대화
-  
+  // ✅ 브레인스토밍용 Google Form (새 폼)
+const BRAIN_FORM_URL =
+'https://docs.google.com/forms/d/e/1FAIpQLSehCajc39WlTGOQTGB2hGg1WY44OpaF4fzMTZMLcDD6nsN02Q/formResponse'
+
+const ENTRY_BRAIN_A = 'entry.366340186'
+const ENTRY_BRAIN_B = 'entry.1842714782'
+const ENTRY_BRAIN_C = 'entry.147773659'
+
 
 const app = document.querySelector('#app')
 
@@ -77,6 +84,34 @@ app.innerHTML = `
             <p class="planet-card__desc">나이가 지구의 2배인 행성</p>
           </div>
         </article>
+      </div>
+    </section>
+
+        <!-- ✅ 브레인스토밍 영역 추가 -->
+    <section class="section brainstorming">
+      <h2 class="section__title">브레인스토밍 영역</h2>
+
+      <p class="brain-desc">
+        <span class="brain-strong">이 영역은 절대 채점에 들어가지 않습니다.</span>
+        틀린 정보든, 단순한 상상이든, 해결하고 싶은 궁금증이든 상관없어요.
+        떠오르는 생각을 아무렇게나 적어보세요!
+      </p>
+
+      <div class="brain-grid">
+        <div class="brain-card">
+          <h3 class="brain-card__title">행성 A</h3>
+          <textarea id="brainA" class="brain-textarea" placeholder="행성 A에 대해 떠오르는 생각을 적어보세요."></textarea>
+        </div>
+
+        <div class="brain-card">
+          <h3 class="brain-card__title">행성 B</h3>
+          <textarea id="brainB" class="brain-textarea" placeholder="행성 B에 대해 떠오르는 생각을 적어보세요."></textarea>
+        </div>
+
+        <div class="brain-card">
+          <h3 class="brain-card__title">행성 C</h3>
+          <textarea id="brainC" class="brain-textarea" placeholder="행성 C에 대해 떠오르는 생각을 적어보세요."></textarea>
+        </div>
       </div>
     </section>
 
@@ -175,6 +210,16 @@ fullForm.addEventListener('submit', (e) => {
 
 formData.append(ENTRY_CHATLOG, chatText)
 
+  // ✅ 브레인스토밍 입력값(3칸)
+  const brainAValue = document.querySelector('#brainA')?.value.trim() || ""
+  const brainBValue = document.querySelector('#brainB')?.value.trim() || ""
+  const brainCValue = document.querySelector('#brainC')?.value.trim() || ""
+
+  // ✅ 브레인스토밍용 FormData (새 폼에 따로 제출)
+  const brainData = new FormData()
+  brainData.append(ENTRY_BRAIN_A, brainAValue)
+  brainData.append(ENTRY_BRAIN_B, brainBValue)
+  brainData.append(ENTRY_BRAIN_C, brainCValue)
 
 
   fetch(GOOGLE_FORM_URL, {
@@ -183,13 +228,26 @@ formData.append(ENTRY_CHATLOG, chatText)
     body: formData
   })
     .then(() => {
+      // ✅ 브레인스토밍 폼도 같이 제출 (별도 폼)
+      return fetch(BRAIN_FORM_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: brainData
+      })
+    })
+    .then(() => {
       finalSubmitBtn.textContent = "제출 완료"
       finalSubmitBtn.classList.add("is-complete")
       finalSubmitBtn.disabled = true
-  
+
       submitStatus.textContent = ""
       fullForm.reset()
     })
+    .catch(() => {
+      submitStatus.textContent = "전송 오류. 네트워크를 확인해주세요."
+      submitStatus.classList.add("is-error")
+    })
+
   
     .catch(() => {
       submitStatus.textContent = "전송 오류. 네트워크를 확인해주세요."

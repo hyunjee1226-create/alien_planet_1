@@ -624,3 +624,61 @@ body::before {
   color: #ffffff;
   cursor: default;
 }
+/* ✅ 브레인스토밍 영역 */
+.brainstorming .brain-desc {
+  margin: 10px 0 18px;
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+.brainstorming .brain-strong {
+  color: #d32f2f;          /* 빨간 글씨 */
+  text-decoration: underline;
+  font-weight: 800;
+  margin-right: 6px;
+}
+
+.brain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.brain-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 14px 14px 12px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+.brain-card__title {
+  margin: 0 0 10px;
+  color: #111111;
+  font-weight: 800;
+}
+
+.brain-textarea {
+  width: 100%;
+  min-height: 160px;
+  resize: vertical;
+  padding: 12px 12px;
+  border: 1px solid #c5d3f3;
+  border-radius: 12px;
+  background: #f7faff;
+  color: #000000;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.brain-textarea:focus {
+  outline: none;
+  border-color: #7ba7ff;
+  box-shadow: 0 0 0 3px rgba(123, 167, 255, 0.25);
+}
+
+/* 모바일에서 3칸 → 1칸 */
+@media (max-width: 900px) {
+  .brain-grid {
+    grid-template-columns: 1fr;
+  }
+}
