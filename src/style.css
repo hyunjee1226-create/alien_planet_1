@@ -18,7 +18,6 @@
   box-sizing: border-box;
 }
 
-
 body {
   margin: 0;
   min-height: 100vh;
@@ -35,31 +34,12 @@ body {
   position: relative;
 }
 
-
-
 #app {
   min-height: 100vh;
   position: relative;
   isolation: isolate;
 }
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image: radial-gradient(2px 2px at 10% 20%, rgba(255, 255, 255, 0.5), transparent),
-    radial-gradient(2px 2px at 25% 35%, rgba(255, 255, 255, 0.35), transparent),
-    radial-gradient(2px 2px at 40% 15%, rgba(255, 255, 255, 0.45), transparent),
-    radial-gradient(2px 2px at 60% 30%, rgba(255, 255, 255, 0.4), transparent),
-    radial-gradient(2px 2px at 80% 12%, rgba(255, 255, 255, 0.5), transparent),
-    radial-gradient(2px 2px at 70% 60%, rgba(255, 255, 255, 0.35), transparent),
-    radial-gradient(2px 2px at 30% 70%, rgba(255, 255, 255, 0.3), transparent),
-    radial-gradient(2px 2px at 50% 50%, rgba(255, 255, 255, 0.55), transparent);
-  opacity: 0.6;
-  z-index: 0;
-}
-
+ 
 #app {
   position: relative;
 }
@@ -73,11 +53,11 @@ body::before {
 .hero {
   text-align: center;
   padding: 48px 32px;
-  background: #ffffff; /* 완전 흰색으로 */
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.06);  /* 반투명 */
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(10px);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
   border-radius: 24px;
-  backdrop-filter: blur(6px);
   margin-bottom: 36px;
 }
 
@@ -97,11 +77,8 @@ body::before {
 }
 
 .hero__subtitle {
-  margin: 0;
-  color: #111111;  /* 기존 #cdd0f7 대신 진한 검정 */
-  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
 }
-
 
 .section {
   background: rgba(255, 255, 255, 0.03);
@@ -126,7 +103,7 @@ body::before {
   list-style: none;         /* 점 없애기 */
 
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -140,25 +117,10 @@ body::before {
   line-height: 1.5;
   color: #111111;           /* 박스 안 글씨는 검정 */
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(135deg, #f2f4f8 0%, #b9c0cc 45%, #ffffff 100%);
+  border: 1px solid rgba(255,255,255,0.85);
 }
-
-/* 네 박스 각각 색 지정 */
-.goal-list__item:nth-child(1) {
-  background: #dff3ff;   /* 연한 하늘색 */
-}
-
-.goal-list__item:nth-child(2) {
-  background: #e3ffe1;   /* 연한 연두색 */
-}
-
-.goal-list__item:nth-child(3) {
-  background: #ffe3f3;   /* 연한 핑크 */
-}
-
-.goal-list__item:nth-child(4) {
-  background: #fff7c9;   /* 연한 노랑 */
-}
-
+ 
 
 .mission-list {
   margin: 0;
@@ -166,7 +128,7 @@ body::before {
   list-style: none;
 
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px;
   align-items: stretch;
 }
@@ -238,6 +200,7 @@ body::before {
 
 .planet-card__body {
   padding: 16px 18px 18px;
+  text-align: center;
 }
 
 .planet-card__title {
@@ -255,13 +218,82 @@ body::before {
   line-height: 1.55;
 }
 
+/* ✅ 브레인스토밍 영역 */
+.brainstorming .brain-desc {
+  margin: 10px 0 18px;
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+.brainstorming .brain-strong {
+  color: #d32f2f;          /* 빨간 글씨 */
+  text-decoration: underline;
+  font-weight: 800;
+  margin-right: 6px;
+}
+
+.brain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.brain-card {
+  background: #ffffff;
+  color: #000000;
+  border-radius: 16px;
+  padding: 14px 14px 12px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+.brain-card__title {
+  margin: 0 0 10px;
+  color: #111111;
+  font-weight: 800;
+}
+
+.brain-textarea {
+  width: 100%;
+  min-height: 160px;
+  resize: vertical;
+  padding: 12px 12px;
+  border: 1px solid #c5d3f3;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f2f4f8 0%, #b9c0cc 45%, #ffffff 100%);
+  color: #000000;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.brain-textarea:focus {
+  outline: none;
+  border-color: #7ba7ff;
+  box-shadow: 0 0 0 3px rgba(123, 167, 255, 0.25);
+}
+
+/* 모바일에서 3칸 → 1칸 */
+@media (max-width: 900px) {
+  .brain-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-title {
+  font-family: 'Orbitron', 'Inter', sans-serif; /* 브레인스토밍/섹션 타이틀과 통일 */
+  text-align: center;
+  font-size: 1.9rem;
+  color: #000000;
+  margin: 0 0 10px;
+}
+
+
 /* '지금부터 생명체를 구상해보자' + 챗봇을 감싸는 큰 박스 */
 .chat-creature-wrapper {
   margin-top: 32px;
   padding: 24px 24px 32px;
   border-radius: 24px;
   background: #ffffff;          /* 흰색 배경 */
-  color: #1d2850;               /* 진한 남색 계열 */
+  color: #000000;              /* 진한 남색 계열 */
   box-shadow: 0 22px 60px rgba(0, 0, 0, 0.4);
 }
 
@@ -269,7 +301,7 @@ body::before {
 .chat-creature-wrapper h2,
 .chat-creature-wrapper p,
 .chat-creature-wrapper label {
-  color: #1d2850;
+  color: #000000;
 }
 
 .creature-section {
@@ -282,7 +314,7 @@ body::before {
 
 .creature-section__inner {
   background: rgba(255, 255, 255, 0.86);
-  color: #233048;
+  color: #000;
   border-radius: 20px;
   padding: 26px 24px;
 }
@@ -291,12 +323,12 @@ body::before {
   margin: 0 0 10px;
   font-family: 'Orbitron', 'Inter', sans-serif;
   letter-spacing: 0.02em;
-  color: #1d2a4b;
+  color: #000;
 }
 
 .creature-section__subtitle {
   margin: 0 0 18px;
-  color: #3c4861;
+  color: #000;
 }
 
 .student-form {
@@ -312,7 +344,7 @@ body::before {
 
 .form-field label {
   font-weight: 600;
-  color: #1e2740;
+  color: #000;
 }
 
 .form-field input {
@@ -337,7 +369,7 @@ body::before {
   border: none;
   border-radius: 12px;
   background: linear-gradient(135deg, #5478ff, #7ae7ff);
-  color: #0b122a;
+  color: #000;
   font-weight: 700;
   cursor: pointer;
   transition: transform 140ms ease, box-shadow 140ms ease;
@@ -355,7 +387,7 @@ body::before {
 .submit-status {
   margin: 8px 0 0;
   font-size: 0.92rem;
-  color: #1e2740;
+  color: #000;
 }
 
 .submit-status.is-success {
@@ -393,7 +425,7 @@ body::before {
   margin: 0;
   font-family: 'Orbitron', 'Inter', sans-serif;
   font-size: 1.5rem;
-  color: #1a1a3e;
+  color: #000;
   letter-spacing: 0.02em;
 }
 
@@ -402,7 +434,7 @@ body::before {
   padding: 4px 10px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.6);
-  color: #1a1a3e;
+  color: #000;
   font-weight: 500;
 }
 
@@ -481,13 +513,13 @@ body::before {
 
 .message--user .message-text {
   background: linear-gradient(135deg, #7ae7ff 0%, #5478ff 100%);
-  color: #0b122a;
+  color: #000;
   border-bottom-right-radius: 4px;
 }
 
 .message--bot .message-text {
   background: linear-gradient(135deg, #ffe0f5 0%, #ffb8e5 100%);
-  color: #1a1a3e;
+  color: #000;
   border-bottom-left-radius: 4px;
 }
 
@@ -503,7 +535,7 @@ body::before {
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.85);
   font-size: 1rem;
-  color: #1a1a3e;
+  color: #000;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -523,7 +555,7 @@ body::before {
   border: none;
   border-radius: 20px;
   background: linear-gradient(135deg, #ffb8e5 0%, #ff7ae7 100%);
-  color: #1a1a3e;
+  color: #000;
   font-weight: 700;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -551,7 +583,7 @@ body::before {
   border: none;
   border-radius: 20px;
   background: linear-gradient(135deg, #5478ff 0%, #7ae7ff 100%);
-  color: #0b122a;
+  color: #000;
   font-weight: 700;
   font-size: 1.1rem;
   cursor: pointer;
@@ -582,65 +614,8 @@ body::before {
   background: linear-gradient(135deg, #2e7d32, #66bb6a);
   color: #ffffff;
   cursor: default;
-}
-/* ✅ 브레인스토밍 영역 */
-.brainstorming .brain-desc {
-  margin: 10px 0 18px;
-  color: #ffffff;
-  line-height: 1.6;
-}
+} 
 
-.brainstorming .brain-strong {
-  color: #d32f2f;          /* 빨간 글씨 */
-  text-decoration: underline;
-  font-weight: 800;
-  margin-right: 6px;
-}
-
-.brain-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.brain-card {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 14px 14px 12px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
-}
-
-.brain-card__title {
-  margin: 0 0 10px;
-  color: #111111;
-  font-weight: 800;
-}
-
-.brain-textarea {
-  width: 100%;
-  min-height: 160px;
-  resize: vertical;
-  padding: 12px 12px;
-  border: 1px solid #c5d3f3;
-  border-radius: 12px;
-  background: #f7faff;
-  color: #000000;
-  font-size: 0.98rem;
-  line-height: 1.5;
-}
-
-.brain-textarea:focus {
-  outline: none;
-  border-color: #7ba7ff;
-  box-shadow: 0 0 0 3px rgba(123, 167, 255, 0.25);
-}
-
-/* 모바일에서 3칸 → 1칸 */
-@media (max-width: 900px) {
-  .brain-grid {
-    grid-template-columns: 1fr;
-  }
-}
 /* ✅ 최종 답안(세로 3칸) 영역 */
 .final-answer-section {
   margin: 14px 0 8px;
@@ -650,9 +625,10 @@ body::before {
 
 .final-answer-title {
   margin: 0 0 6px;
-  font-size: 1.1rem;
+  font-size: 2.9rem;
   font-weight: 800;
-  color: #1d2850;
+  color: #ffffff; 
+  text-align: center; 
 }
 
 .final-answer-card {
@@ -665,9 +641,10 @@ body::before {
 
 .final-answer-q {
   margin: 0 0 10px;
-  color: #111111;
+  color: #000000;
   font-weight: 800;
   line-height: 1.5;
+  font-size: 1.2rem;
 }
 
 .final-answer-textarea {
@@ -687,4 +664,13 @@ body::before {
   outline: none;
   border-color: #7ba7ff;
   box-shadow: 0 0 0 3px rgba(123, 167, 255, 0.25);
+}
+
+.final-answer-wrapper {
+  margin-top: 18px;
+  padding: 24px 24px 32px;
+  border-radius: 24px;
+  background: rgba(207, 201, 201, 0.363);  /* 반투명 */
+  color: #000;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.31);
 }

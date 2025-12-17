@@ -28,12 +28,15 @@ app.innerHTML = `
       <h1 class="hero__title">가상의 외계 행성 속, 생명체의 진화</h1>
       <!-- 여기 텍스트는 나중에 수정 예정 -->
       <p class="hero__subtitle">
-        미지의 우주에서 새로운 생명체를 상상하며 탐구하는 여정을 함께합니다.
+        <br>"당신에게 외계 행성 중 한 곳을 탐사할 임무가 주어졌습니다.<br>
+        후보는 세 곳. 세 행성 모두에서 생명체의 신호가 포착되었지만, 그 정체와 환경에 대한 정보는 거의 없습니다.<br><br>
+        미지의 행성으로 출발하기 전, 여러분은 행성의 환경을 미리 예측해 위험을 대비해야 합니다.<br>
+        당신은, 어떤 행성으로 떠나시겠습니까?"
       </p>
     </section>
 
     <section class="section goals">
-      <h2 class="section__title">교육 목표</h2>
+      <h2 class="section__title">활동 목표</h2>
       <!-- 여기 텍스트는 나중에 수정 예정 -->
       <ul class="goal-list">
         <li class="goal-list__item">과학적 사고력 기르기</li>
@@ -44,17 +47,19 @@ app.innerHTML = `
     </section>
 
     <section class="section missions">
-      <h2 class="section__title">오늘의 탐사 미션</h2>
+      <h2 class="section__title">오늘의 미션</h2>
       <ol class="mission-list">
-        <li class="mission-list__item">탐사할 행성 선택</li>
-        <li class="mission-list__item">행성 환경 예측</li>
-        <li class="mission-list__item">새로운 생명체 상상</li>
-        <li class="mission-list__item">발표 및 도감 완성</li>
+        <li class="mission-list__item">❶ 행성 선택 </li>
+        <li class="mission-list__item">❷ 환경 예측 </li>
+        <li class="mission-list__item">❸ 생명체 예상 </li>
+        <li class="mission-list__item">❹ 추가 포식자 예상 </li>
+        <li class="mission-list__item">❺ 도감 완성 </li>
       </ol>
+
     </section>
 
     <section class="section planets">
-      <h2 class="section__title">행성 카드</h2>
+      <h2 class="section__title">행성 후보</h2>
       <div class="planet-grid">
         <article class="planet-card">
           <div class="planet-card__image">
@@ -96,9 +101,9 @@ app.innerHTML = `
       <h2 class="section__title">브레인스토밍 영역</h2>
 
       <p class="brain-desc">
-        <span class="brain-strong">이 영역은 절대 채점에 들어가지 않습니다.</span>
-        틀린 정보든, 단순한 상상이든, 해결하고 싶은 궁금증이든 상관없어요.
-        떠오르는 생각을 아무렇게나 적어보세요!
+        <span class="brain-strong">이 영역은 절대 채점에 들어가지 않습니다.</span><br>
+        과학적 사실이든, 틀린 정보든, 단순한 상상이든, 해결하고 싶은 궁금증이든 상관없어요.
+        떠오르는 생각들을 정리하지 말고, 마구 써보세요!
       </p>
 
       <div class="brain-grid">
@@ -123,24 +128,23 @@ app.innerHTML = `
 
       <form id="fullForm" class="full-form">
 
-        <h2 class="form-title">지금부터 생명체를 구상해보자</h2>
-        <p>아래 정보를 입력한 후, 아스트라와 대화하여 탐사 내용을 완성해보세요.</p>
-
+        <br><h2 class="form-title">자, 어떤 행성을 연구하기로 결정했나요?</h2>
+        <p>AI 챗봇 🤖아스트라가 여러분의 연구를 도와줄 거예요!</p><br>
         <div class="form-field">
           <label for="studentId">학번</label>
-          <input type="text" id="studentId" required />
+          <input type="text" id="studentId" placeholder="예: 2103" required />
         </div>
 
         <div class="form-field">
           <label for="studentName">이름</label>
-          <input type="text" id="studentName" required />
+          <input type="text" id="studentName" placeholder="예: 이우주" required />
         </div>
  
         <div class="form-field">
           <label for="selectedPlanet">선택한 행성</label>
-          <input type="text" id="selectedPlanet" placeholder="행성 A/B/C 중 선택" required />
-        </div>
-
+          <input type="text" id="selectedPlanet" placeholder="행성A / 행성B / 행성C 중 택1" required />
+        </div><br>
+ 
         <!-- 챗봇 영역 -->
         <div class="chatbot-section">
           <div class="chatbot-container">
@@ -156,48 +160,62 @@ app.innerHTML = `
     type="text"
     id="chatbotInput"
     class="chatbot-input"
-    placeholder="아스트라에게 질문해보세요..."
+    placeholder="아스트라에게 신중히 질문해보세요:)"
     autocomplete="off"
   />
   <button type="button" id="chatbotSendBtn" class="chatbot-submit-btn">
     전송
   </button>
 </div>
-
           </div>
         </div>
         
-  <div class="submit-warning">
-    ⚠️ 대화 내용을 제출하기 전, <strong>‘대화 요약’</strong>이라는 명령어를 입력한 후, 응답을 받아주세요.
-  </div>
-  
-  <div class="final-answer-section">
-    <h3 class="final-answer-title">최종 정리</h3>
-
-    <div class="final-answer-card">
-      <p class="final-answer-q">1) 선택한 행성의 환경은 어떤 특징을 가질까요? (최소 3가지)</p>
-      <textarea id="envAnswer" class="final-answer-textarea" placeholder="예: 온도, 대기 성분, 중력, 지표 환경 등 최소 3가지"></textarea>
-    </div>
-
-    <div class="final-answer-card">
-      <p class="final-answer-q">2) 선택한 행성의 피식자는 어떤 특징을 가질까요? (최소 3가지)</p>
-      <textarea id="preyAnswer" class="final-answer-textarea" placeholder="예: 크기, 이동 방식, 방어 전략 등 최소 3가지"></textarea>
-    </div>
-
-    <div class="final-answer-card">
-      <p class="final-answer-q">3) 선택한 행성의 포식자는 어떤 모습을 가질까요? (최소 3가지)</p>
-      <textarea id="predAnswer" class="final-answer-textarea" placeholder="예: 사냥 방식, 감각 기관, 몸 구조 등 최소 3가지"></textarea>
-    </div>
+    <div class="submit-warning">
+    ⚠️ 대화가 끝난 후, 꼭 <strong>‘대화 요약’</strong>이라는 명령어를 입력해주세요. ⚠️
   </div>
 
-        <button type="submit" id="finalSubmitBtn" class="final-submit-btn" style="display:none;">
+      </form>
+    </section>
+
+    <!-- ✅ 최종 정리 섹션(새 섹션으로 분리) -->
+    <section class="final-answer-wrapper">
+      <div class="final-answer-section">
+        <h3 class="final-answer-title">📜 최종 탐구 일지 📜</h3>
+
+        <div class="final-answer-card">
+          <p class="final-answer-q">1) 당신이 탐사하기로 한 행성은 어떤 모습인가요? (최소 3가지)</p>
+          <textarea id="envAnswer" class="final-answer-textarea" placeholder="예: 온도/대기/날씨/시간/지표 환경 등 
+1.
+2.
+3."></textarea>
+        </div>
+
+        <div class="final-answer-card">
+          <p class="final-answer-q">2) 그 행성에서 마주하게 될 생명체는 어떤 모습인가요? (최소 3가지)</p>
+          <textarea id="preyAnswer" class="final-answer-textarea" placeholder="예: 크기/이동 방식/방어 전략/피부/장기 구조 등 
+1.
+2.
+3."></textarea>
+        </div>
+
+        <div class="final-answer-card">
+          <p class="final-answer-q">3) 2번 생명체를 잡아 먹을 포식자는 어떤 모습인가요? (최소 3가지)</p>
+          <textarea id="predAnswer" class="final-answer-textarea" placeholder="예: 사냥 방식/감각 기관/활동 시간/취약점/번식 방식 등 
+1.
+2.
+3."></textarea>
+        </div>
+
+        <!-- ✅ 제출 버튼은 최종정리 섹션 맨 아래로 -->
+        <button type="button" id="finalSubmitBtn" class="final-submit-btn" style="display:none;">
           제출하기
         </button>
 
         <p id="submitStatus" class="submit-status"></p>
-
-      </form>
+      </div>
     </section>
+
+    
 
   </main>
 `
@@ -328,6 +346,11 @@ const chatbotMessagesEl = document.querySelector('#chatbotMessages')
 const chatbotInput = document.querySelector('#chatbotInput')
 const finalSubmitBtn = document.querySelector('#finalSubmitBtn')
 
+finalSubmitBtn.addEventListener('click', () => {
+  fullForm.requestSubmit()
+})
+
+
 const brainAEl = document.querySelector('#brainA')
 const brainBEl = document.querySelector('#brainB')
 const brainCEl = document.querySelector('#brainC')
@@ -399,9 +422,9 @@ if (apiKey) {
 
 // 초기 안내문
 const initialMessage = `
-저는 당신의 행성 탐사를 도와줄 아스트라(Astra)예요!  
-이 행성의 환경과 생명체를 연구하며 떠오른 궁금증을 마음껏 물어보세요!  
-하지만 질문 기회는 단 5번! 저는 정답을 알려주지 않지만,  
+저는 당신의 행성 탐사를 도와줄 아스트라(Astra)예요!
+이 행성의 환경과 생명체를 연구하며 떠오른 궁금증을 무엇이든 물어보세요!  
+단, 질문 기회는 딱 5번! 저는 정답을 알려주지 않지만,  
 여러분이 올바른 방향으로 탐사를 이어갈 수 있도록 돕는 역할을 하고 있어요.
 `
 
