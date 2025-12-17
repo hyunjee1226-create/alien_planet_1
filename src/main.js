@@ -39,7 +39,7 @@ app.innerHTML = `
       <h2 class="section__title">활동 목표</h2>
       <!-- 여기 텍스트는 나중에 수정 예정 -->
       <ul class="goal-list">
-        <li class="goal-list__item">과학적 사고력 기르기</li>
+        <li class="goal-list__item">과학적 사고력 향상</li>
         <li class="goal-list__item">지식 정보 처리 능력 향상</li>
         <li class="goal-list__item">창의적 상상력과 표현력 신장</li>
         <li class="goal-list__item">협력적 문제 해결 경험</li>
@@ -52,7 +52,7 @@ app.innerHTML = `
         <li class="mission-list__item">❶ 행성 선택 </li>
         <li class="mission-list__item">❷ 환경 예측 </li>
         <li class="mission-list__item">❸ 생명체 예상 </li>
-        <li class="mission-list__item">❹ 추가 포식자 예상 </li>
+        <li class="mission-list__item">❹포식자/피식자 예상 </li>
         <li class="mission-list__item">❺ 도감 완성 </li>
       </ol>
 
@@ -101,7 +101,7 @@ app.innerHTML = `
       <h2 class="section__title">브레인스토밍 영역</h2>
 
       <p class="brain-desc">
-        <span class="brain-strong">이 영역은 채점에 들어가지 않습니다.</span><br>
+        <span class="brain-strong">※이 영역은 채점에 들어가지 않습니다.</span><br>
         과학적 사실이든, 틀린 정보든, 단순한 상상이든, 해결하고 싶은 궁금증이든 상관없어요.
         떠오르는 생각들을 정리하지 말고, 마구 써보세요!
       </p>
@@ -183,29 +183,54 @@ app.innerHTML = `
         <br><h3 class="final-answer-title">🛸 최종 탐구 일지 🛸</h3>
 
         <div class="final-answer-card">
-          <p class="final-answer-q">1) 당신이 탐사하기로 한 행성은 어떤 모습인가요? (최소 3가지)</p>
-          <textarea id="envAnswer" class="final-answer-textarea" placeholder="예: 온도/대기/날씨/시간/지표 환경 등 
+          <div class="final-answer-row">
+            <div class="final-answer-thumb">
+              <img src="/final1.png" alt="질문 1 이미지" />
+            </div>
+
+            <div class="final-answer-content">
+              <p class="final-answer-q">1) 당신이 탐사하기로 한 행성은 어떤 모습인가요? (최소 3가지)</p>
+                <textarea id="envAnswer" class="final-answer-textarea" placeholder="예: 온도/대기/날씨/시간/지표 환경 등 
 1.
 2.
 3."></textarea>
+            </div>
+          </div>
         </div>
 
         <div class="final-answer-card">
+          <div class="final-answer-row">
+            <div class="final-answer-thumb">
+              <img src="/final2.png" alt="질문 2 이미지" />
+            </div>
+
+            <div class="final-answer-content">
           <p class="final-answer-q">2) 그 행성에서 마주하게 될 생명체는 어떤 모습인가요? (최소 3가지)</p>
-          <textarea id="preyAnswer" class="final-answer-textarea" placeholder="예: 크기/이동 방식/방어 전략/피부/장기 구조 등 
+          <textarea id="preyAnswer" class="final-answer-textarea" placeholder="예: 크기/이동 방식/방어 전략/피부/장기 구조 등
 1.
 2.
 3."></textarea>
+            </div>
+          </div>
         </div>
-
+         
         <div class="final-answer-card">
-          <p class="final-answer-q">3) 2번 생명체를 잡아 먹을 포식자는 어떤 모습인가요? (최소 3가지)</p>
+          <div class="final-answer-row">
+            <div class="final-answer-thumb">
+              <img src="/final3.png" alt="질문 3 이미지" />
+            </div>
+
+            <div class="final-answer-content">
+          <p class="final-answer-q">3) 위 생명체의 포식자 또는 피식자는 어떤 모습인가요? (최소 3가지)</p>
           <textarea id="predAnswer" class="final-answer-textarea" placeholder="예: 사냥 방식/감각 기관/활동 시간/취약점/번식 방식 등 
 1.
 2.
 3."></textarea>
+            </div>
+          </div>
         </div>
 
+ 
         <!-- ✅ 제출 버튼은 최종정리 섹션 맨 아래로 -->
         <button type="button" id="finalSubmitBtn" class="final-submit-btn" style="display:none;">
           제출하기
@@ -214,6 +239,11 @@ app.innerHTML = `
         <p id="submitStatus" class="submit-status"></p>
       </div>
     </section>
+
+    <!-- ✅ 페이지 맨 아래 안내문 (박스 없음) -->
+    <div class="bottom-notice bottom-notice--gradient">
+      🪬이제, 도감을 만들어볼까요?
+    </div>
 
     
 
@@ -328,11 +358,11 @@ let chatHistory = [
 [대화 요약 규칙]
 사용자가 정확히 "대화 요약"이라고 입력하면, 질문 횟수 제한과 무관하게 반드시 요약만 출력한다.
 요약 형식:
-1) 전체 흐름 요약: (예: 개념 정의→환경 예측→생명체 상상→과학적 검증→재검증)
-2) 사용자의 질문 특성: 3가지로 요약(과학 교과 학습자로서의 특성, 학습 태도, 질문의 수준 등을 판단)
+1) 사용자 질문을 단계별로로 요약: (예: 개념 질문→환경 예측→생명체 상상→과학적 검증→재검증)
+2) 사용자가 한 특징을 분석하여 제시할 것(과학 교과 학습자로서의 특성, 학습 태도, 질문의 수준 등을 판단하되, 일부러 좋게 평가할 필요는 없음. 객관적으로 평가할 것)
 제약:
 - 총 300자 이내
-- 불필요한 서론 금지, 요약만 출력
+- 불필요한 서론 금지, 요약과 특징 분석석만 출력
 - 마지막 문장에 "더 궁금한 걸 물어봐" 류의 문장 금지
 
     `.trim(),
