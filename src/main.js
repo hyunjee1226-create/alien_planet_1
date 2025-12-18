@@ -3,7 +3,6 @@ import './style.css'
 const GOOGLE_FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSeoI5MkcKty2pfQlVTvtvI7eDXujNJhrKksg4DZbQbEEqjN-g/formResponse'
 
-// ✅ 통합 폼 엔트리(네가 준 값으로 통일)
 const ENTRY_STUDENT_ID = 'entry.1257199285'     // 학번
 const ENTRY_NAME = 'entry.368492961'            // 이름
 
@@ -96,7 +95,6 @@ app.innerHTML = `
       </div>
     </section>
 
-        <!-- ✅ 브레인스토밍 영역 추가 -->
     <section class="section brainstorming">
       <h2 class="section__title">브레인스토밍 영역</h2>
 
@@ -177,7 +175,6 @@ app.innerHTML = `
       </form>
     </section>
 
-    <!-- ✅ 최종 정리 섹션(새 섹션으로 분리) -->
     <section class="final-answer-wrapper">
       <div class="final-answer-section">
         <br><h3 class="final-answer-title">🛸 최종 탐구 일지 🛸</h3>
@@ -231,7 +228,6 @@ app.innerHTML = `
         </div>
 
  
-        <!-- ✅ 제출 버튼은 최종정리 섹션 맨 아래로 -->
         <button type="button" id="finalSubmitBtn" class="final-submit-btn" style="display:none;">
           제출하기
         </button>
@@ -240,7 +236,6 @@ app.innerHTML = `
       </div>
     </section>
 
-    <!-- ✅ 페이지 맨 아래 안내문 (박스 없음) -->
     <div class="bottom-notice bottom-notice--gradient">
       🪬이제, 도감을 만들어볼까요?
     </div>
@@ -280,7 +275,7 @@ fullForm.addEventListener('submit', (e) => {
   formData.append(ENTRY_NAME, nameValue)
   formData.append(ENTRY_STUDENT_ID, idValue)
   formData.append(ENTRY_PLANET, planetValue)
-  // ✅ 제출 직전에 chatHistory로 전체 대화 로그를 다시 구성 (system 제외)
+
   const chatText = chatHistory
     .filter(m => m.role !== "system")
     .map(m => (m.role === "user" ? `User: ${m.content}` : `Astra: ${m.content}`))
@@ -288,12 +283,10 @@ fullForm.addEventListener('submit', (e) => {
 
 formData.append(ENTRY_CHATLOG, chatText)
 
-  // ✅ 브레인스토밍 3칸
   const brainAValue = brainAEl?.value.trim() || ""
   const brainBValue = brainBEl?.value.trim() || ""
   const brainCValue = brainCEl?.value.trim() || ""
 
-  // ✅ 최종답안 3칸
   const envValue = envEl?.value.trim() || ""
   const preyValue = preyEl?.value.trim() || ""
   const predValue = predEl?.value.trim() || ""
@@ -320,7 +313,6 @@ formData.append(ENTRY_CHATLOG, chatText)
       submitStatus.textContent = ""
       submitStatus.classList.remove("is-error")
 
-      // ✅ 폼 reset은 form 안의 input만 초기화되므로 textarea도 수동 초기화
       fullForm.reset()
       if (brainAEl) brainAEl.value = ""
       if (brainBEl) brainBEl.value = ""
@@ -389,7 +381,7 @@ const envEl = document.querySelector('#envAnswer')
 const preyEl = document.querySelector('#preyAnswer')
 const predEl = document.querySelector('#predAnswer')
 
-let summaryUnlocked = false  // ✅ '대화 요약' 응답까지 받은 뒤 true
+let summaryUnlocked = false  //  '대화 요약' 응답까지 받은 뒤 true
 
 function countIdeas(text) {
   // 줄바꿈/쉼표/중점/세미콜론 기준으로 항목 수 세기
@@ -541,7 +533,7 @@ chatbotSendBtn.addEventListener('click', async (e) => {
       chatHistory.push({ role: "assistant", content: reply })
       conversationLog += "Astra: " + reply + "\n\n"
     
-      // ✅ 요약 명령일 때만 제출 버튼 활성화
+      //  요약 명령일 때만 제출 버튼 활성화
       if (isSummaryCommand) {
         summaryUnlocked = true
         updateSubmitUI()
