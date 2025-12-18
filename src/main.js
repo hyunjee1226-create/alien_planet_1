@@ -40,9 +40,9 @@ app.innerHTML = `
       <!-- 여기 텍스트는 나중에 수정 예정 -->
       <ul class="goal-list">
         <li class="goal-list__item">  <span class="underline">과학적인 근거</span>를<br>기반으로 추론해보기 </li>
-        <li class="goal-list__item">수집한  <span class="underline">정보를<br>검증하고 선별</span>하기</li>
+        <li class="goal-list__item"><span class="underline">여러 분야</span>의 지식을<br><span class="underline">융합</span>하여 해석해보기</li>
         <li class="goal-list__item">정답이 없는 문제를<br><span class="underline">창의적으로 해결</span>해보기 </li>
-        <li class="goal-list__item"><span class="underline">AI와 소통하며<br>협업</span>해보기</li>
+        <li class="goal-list__item"><span class="underline">AI와 소통</span>하며<br><span class="underline">정보를 선별</span>하기</li>
       </ul>
     </section>
 
