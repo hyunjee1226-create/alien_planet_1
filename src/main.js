@@ -39,10 +39,10 @@ app.innerHTML = `
       <h2 class="section__title">활동 목표</h2>
       <!-- 여기 텍스트는 나중에 수정 예정 -->
       <ul class="goal-list">
-        <li class="goal-list__item">과학적 사고력 향상</li>
-        <li class="goal-list__item">지식 정보 처리 능력 향상</li>
-        <li class="goal-list__item">창의적 상상력과 표현력 신장</li>
-        <li class="goal-list__item">협력적 문제 해결 경험</li>
+        <li class="goal-list__item">  <span class="underline">과학적인 근거</span>를<br>기반으로 추론해보기 </li>
+        <li class="goal-list__item">수집한  <span class="underline">정보를<br>검증하고 선별</span>하기</li>
+        <li class="goal-list__item">정답이 없는 문제를<br><span class="underline">창의적으로 해결</span>해보기 </li>
+        <li class="goal-list__item"><span class="underline">AI와 소통하며<br>협업</span>해보기</li>
       </ul>
     </section>
 
@@ -160,7 +160,7 @@ app.innerHTML = `
     type="text"
     id="chatbotInput"
     class="chatbot-input"
-    placeholder="아스트라에게 신중히 질문해보세요:)"
+    placeholder="아스트라에게 질문해보세요:)"
     autocomplete="off"
   />
   <button type="button" id="chatbotSendBtn" class="chatbot-submit-btn">
@@ -500,7 +500,7 @@ chatbotSendBtn.addEventListener('click', async (e) => {
 
   const isSummaryCommand = msg === "대화 요약"
   if (!isSummaryCommand && questionCount >= MAX_QUESTIONS) {
-    displayMessage("질문 기회를 모두 소진하셨습니다. 전 충전이 필요해요..zz", false)
+    displayMessage("질문 기회를 모두 소진하셨습니다. 전 충전이 필요해요😴", false)
     return
   }
   

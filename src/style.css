@@ -754,3 +754,16 @@ body {
     height: 110px;
   }
 }
+
+.underline {
+  font-size: 1.1em;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;   /* 밑줄 두께 */
+  text-underline-offset: 3px;        /* 글자와 밑줄 간격 */
+  text-decoration-color: rgb(0, 0, 0); /* 밑줄 색 */
+  font-weight: 700;                  /* 살짝 강조 */
+}
+
+.goal-list__item{
+  font-size: 1.2rem; /* 원하는 크기로 조절 */
+}
